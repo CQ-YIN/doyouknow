@@ -19,6 +19,7 @@
       font-family: 'Lexend', sans-serif;
       background: var(--white);
       color: var(--black-text);
+      overflow-x: hidden; /* prevent horizontal scroll */
     }
     /* Navigation */
     nav {
@@ -52,13 +53,13 @@
       background: rgba(0, 0, 0, 0.1);
     }
     /* Intro section: two-column */
-    .intro {
+        .intro {
       height: 100vh;
       background: var(--pink-bg);
       display: grid;
       grid-template-columns: 1fr 1fr;
-      align-items: center;
-      padding: 3rem 10%; /* use percentage for horizontal inset */
+      align-items: start; /* align to top */
+      padding: 6rem 10% 3rem; /* more top padding */
       gap: 2rem;
     }
     .intro-text {
@@ -188,7 +189,7 @@
       <p>Share your story and help us build an inclusive community.</p>
     </div>
     <div class="intro-media">
- <img src="intro.png" alt="Illustration of animals" />
+      <img src="intro.png" alt="Illustration of diverse animals" />
     </div>
   </section>
   <div class="animal-container">
