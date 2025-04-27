@@ -183,10 +183,7 @@
   <section class="intro">
     <div class="intro-text">
       <h1>Do You Know?</h1>
-      <div class="tagline">A space to share, listen, and grow together.</div>
-      <p>At some point in life, everyone faces disability.</p>
-      <p>Each animal below embodies 3 voices: lived experiences of disabled participants and perspectives of non-disabled allies.</p>
-      <p>Share your story and help us build an inclusive community.</p>
+   <div class="tagline">A space to share, listen, and grow together.</div> <p>At some point in life, everyone faces disability.</p> <p>Each animal below embodies three voices: lived experiences of disabled participants and perspectives of non-disabled allies.</p> <p>When you submit your story, it will be transformed into a random animal's voice on the Home page, becoming part of our growing community.</p> <p>Share your story and help us build an inclusive world.</p>
     </div>
     <div class="intro-media">
       <img src="intro.png" alt="Illustration of diverse animals" />
@@ -211,7 +208,16 @@
 
   <script>
     // Declare animals once
-    const animals = ['🐘','🦊','🦉','🦋','🐢','🐳','🦒','🦔','🦓','🐅','🐇','🐆','🐄','🐈','🐒'];
+// index.html – in your <script> at the top:
+const animals = [
+  // original 15
+  '🐘','🦊','🦉','🦋','🐢','🐳','🦒','🦔','🦓','🐅','🐇','🐆','🐄','🐈','🐒',
+  // +30 new ones
+  '🦜','🦩','🦞','🦐','🦝','🦙','🦛','🦥','🦦','🦨',
+  '🦇','🦘','🦢','🐋','🐬','🐟','🐠','🐡','🦈','🐊',
+  '🦏','🦫','🦧','🐙','🦑','🐫','🐃','🐐','🐏','🐑'
+];
+
     // Shuffle helper
     function shuffle(arr) {
       const a = arr.slice();
