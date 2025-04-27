@@ -1,10 +1,9 @@
-<!-- ------------------- index.html ------------------- -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>DoYouKnow</title>
+  <title>DoYouKnow - Home</title>
   <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@400;600;800&display=swap" rel="stylesheet" />
   <style>
     :root {
@@ -19,7 +18,7 @@
       font-family: 'Lexend', sans-serif;
       background: var(--white);
       color: var(--black-text);
-      overflow-x: hidden; /* prevent horizontal scroll */
+      overflow-x: hidden;
     }
     /* Navigation */
     nav {
@@ -53,13 +52,13 @@
       background: rgba(0, 0, 0, 0.1);
     }
     /* Intro section: two-column */
-        .intro {
+    .intro {
       height: 100vh;
       background: var(--pink-bg);
       display: grid;
       grid-template-columns: 1fr 1fr;
-      align-items: start; /* align to top */
-      padding: 12% 10% 12%; /* more top padding */
+      align-items: start;
+      padding: 6rem 10% 3rem;
       gap: 2rem;
     }
     .intro-text {
@@ -70,7 +69,7 @@
       font-weight: 800;
       margin-bottom: 1rem;
     }
-    .tagline {
+    .intro-text .tagline {
       font-size: 1rem;
       font-style: italic;
       opacity: 0.8;
@@ -180,6 +179,7 @@
       <a href="non-disabled.html">Non-Disabled Input</a>
     </div>
   </nav>
+
   <section class="intro">
     <div class="intro-text">
       <h1>Do You Know?</h1>
@@ -192,6 +192,7 @@
       <img src="intro.png" alt="Illustration of diverse animals" />
     </div>
   </section>
+
   <div class="animal-container">
     <div class="row" id="row1"></div>
     <div class="row" id="row2"></div>
@@ -199,11 +200,15 @@
     <div class="row" id="row4"></div>
     <div class="row" id="row5"></div>
   </div>
+
   <section class="spacer"></section>
+
   <div class="overlay" id="overlay" aria-hidden="true">
     <div class="popup" role="dialog" aria-modal="true" tabindex="-1" id="popup"></div>
   </div>
+
   <footer>&copy; 2025 DoYouKnow</footer>
+
   <script>
     // Declare animals once
     const animals = ['🐘','🦊','🦉','🦋','🐢','🐳','🦒','🦔','🦓','🐅','🐇','🐆','🐄','🐈','🐒'];
@@ -216,9 +221,9 @@
       }
       return a;
     }
-    // Populate each row with a unique shuffled sequence duplicated
-    const rows = ['row1','row2','row3','row4','row5'].map(id => document.getElementById(id));
-    rows.forEach((row) => {
+    // Populate each row
+    ['row1','row2','row3','row4','row5'].forEach(id => {
+      const row = document.getElementById(id);
       const seq = shuffle(animals);
       [...seq, ...seq].forEach(e => {
         const el = document.createElement('div');
@@ -241,7 +246,17 @@
       overlay.classList.remove('show');
       overlay.setAttribute('aria-hidden','true');
     }
-    overlay.addEventListener('click', ev => { if (ev.target === overlay) closePopup(); });
+    // Load stored submissions on home
+    function loadSubmissions() {
+      const subs = JSON.parse(localStorage.getItem('doyouknow_submissions') || '[]');
+      console.log('Loaded submissions:', subs);
+      // TODO: merge subs into the carousel/popups
+    }
+    loadSubmissions();
+    // Live update
+    window.addEventListener('storage', e => {
+      if (e.key === 'doyouknow_submissions') loadSubmissions();
+    });
   </script>
 </body>
 </html>
