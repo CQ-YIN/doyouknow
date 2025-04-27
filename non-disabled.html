@@ -1,1 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>DoYouKnow - Non-Disabled Input</title>
+  <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@400;600;800&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --pink-bg: #ffe4e1;
+      --white: #ffffff;
+      --black-text: #000000;
+      --deep-pink: #e91e63;
+    }
+    *, *::before, *::after { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: 'Lexend', sans-serif;
+      background: var(--white);
+      color: var(--black-text);
+      overflow-x: hidden;
+    }
+    nav {
+      position: sticky; top: 0;
+      background: var(--pink-bg);
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 1rem 2rem; border-bottom: 1px solid var(--black-text);
+      z-index: 100;
+    }
+    .logo { font-size: 1.5rem; font-weight: 800; }
+    .nav-links { display: flex; gap: 1.5rem; }
+    nav a { text-decoration: none; color: var(--black-text);
+      font-weight: 600; padding: .5rem 1rem; border-radius: 999px;
+      transition: background .3s; }
+    nav a:hover { background: rgba(0,0,0,0.1); }
+    .form-container {
+      max-width: 600px; margin: 6rem auto; padding: 0 2rem;
+    }
+    .form-container h2 {
+      font-size: 2rem; margin-bottom: 1rem;
+    }
+    .form-container label {
+      display: block; margin-bottom: .5rem;
+      font-weight: 600;
+    }
+    .form-container textarea {
+      width: 100%; height: 200px; padding: 1rem;
+      font-size: 1rem; border: 1px solid #ccc;
+      border-radius: .5rem; resize: vertical;
+    }
+    .form-container button {
+      margin-top: 1rem; padding: .75rem 1.5rem;
+      font-size: 1rem; font-weight: 600;
+      color: var(--white); background: var(--black-text);
+      border: none; border-radius: .5rem;
+      cursor: pointer;
+    }
+    .form-container button:disabled {
+      background: #888; cursor: not-allowed;
+    }
+    .form-container .note {
+      margin-top: .5rem;
+      font-size: .9rem;
+      color: var(--deep-pink);
+    }
+    footer {
+      text-align: center; padding: 2rem 1rem;
+      background: var(--white); color: var(--black-text);
+      font-size: .8rem; border-top: 1px solid #ddd;
+    }
+  </style>
+</head>
+<body>
+  <nav>
+    <div class="logo">DoYouKnow</div>
+    <div class="nav-links">
+      <a href="index.html">Home</a>
+      <a href="disabled.html">Disabled Input</a>
+      <a href="non-disabled.html">Non-Disabled Input</a>
+    </div>
+  </nav>
+
+  <section class="form-container">
+    <h2>Non-Disabled Input</h2>
+    <label for="nonDisabledText">Your perspective matters. Share 1 sentence on your understanding of the disabled community, what you think they need, and how you could help:</label>
+    <textarea id="nonDisabledText" aria-label="Non-disabled participants input"></textarea>
+    <button id="nonDisabledSubmit" disabled>Submit</button>
+    <p class="note">*Multiple submissions are welcome.</p>
+  </section>
+
+  <footer>&copy; 2025 DoYouKnow</footer>
+
+  <script>
+    function saveNonDisabled(text) {
+      const key = 'doyouknow_submissions';
+      const all = JSON.parse(localStorage.getItem(key) || '[]');
+      all.push({ type: 'non-disabled', text });
+      localStorage.setItem(key, JSON.stringify(all));
+    }
+    const nonTxt = document.getElementById('nonDisabledText');
+    const nonBtn = document.getElementById('nonDisabledSubmit');
+    nonTxt.addEventListener('input', () => {
+      nonBtn.disabled = !nonTxt.value.trim();
+    });
+    nonBtn.addEventListener('click', () => {
+      const txt = nonTxt.value.trim();
+      if (!txt) return;
+      saveNonDisabled(txt);
+      alert('Thank you for sharing!');
+      nonTxt.value = '';
+      nonBtn.disabled = true;
+    });
+  </script>
+</body>
+</html>
 
