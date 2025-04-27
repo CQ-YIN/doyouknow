@@ -10,12 +10,15 @@
       --pink-bg: #ffe4e1;
       --white: #ffffff;
       --black-text: #000000;
-      --deep-pink: #e91e63；
+      --deep-pink: #e91e63;
     }
     *, *::before, *::after { box-sizing: border-box; }
     body {
-      margin: 0; font-family: 'Lexend', sans-serif;
-      background: var(--white); color: var(--black-text);
+      margin: 0;
+      font-family: 'Lexend', sans-serif;
+      background: var(--white);
+      color: var(--black-text);
+      overflow-x: hidden;
     }
     nav {
       position: sticky; top: 0;
@@ -26,39 +29,65 @@
     }
     .logo { font-size: 1.5rem; font-weight: 800; }
     .nav-links { display: flex; gap: 1.5rem; }
-    nav a { text-decoration: none; color: var(--black-text);
-      font-weight: 600; padding: .5rem 1rem; border-radius: 999px;
-      transition: background .3s; }
+    nav a {
+      text-decoration: none;
+      color: var(--black-text);
+      font-weight: 600;
+      padding: .5rem 1rem;
+      border-radius: 999px;
+      transition: background .3s;
+    }
     nav a:hover { background: rgba(0,0,0,0.1); }
     .form-container {
-      max-width: 600px; margin: 6rem auto; padding: 0 2rem;
+      max-width: 600px;
+      margin: 6rem auto;
+      padding: 0 2rem;
     }
     .form-container h2 {
-      font-size: 2rem; margin-bottom: 1rem;
+      font-size: 2rem;
+      margin-bottom: 1rem;
     }
     .form-container label {
-      display: block; margin-bottom: .5rem;
+      display: block;
+      margin-bottom: .5rem;
       font-weight: 600;
     }
     .form-container textarea {
-      width: 100%; height: 200px; padding: 1rem;
-      font-size: 1rem; border: 1px solid #ccc;
-      border-radius: .5rem; resize: vertical;
+      width: 100%;
+      height: 200px;
+      padding: 1rem;
+      font-size: 1rem;
+      border: 1px solid #ccc;
+      border-radius: .5rem;
+      resize: vertical;
     }
     .form-container button {
-      margin-top: 1rem; padding: .75rem 1.5rem;
-      font-size: 1rem; font-weight: 600;
-      color: var(--white); background: var(--black-text);
-      border: none; border-radius: .5rem;
+      margin-top: 1rem;
+      padding: .75rem 1.5rem;
+      font-size: 1rem;
+      font-weight: 600;
+      color: var(--white);
+      background: var(--black-text);
+      border: none;
+      border-radius: .5rem;
       cursor: pointer;
     }
     .form-container button:disabled {
-      background: #888; cursor: not-allowed;
+      background: #888;
+      cursor: not-allowed;
+    }
+    .form-container .note {
+      margin-top: .5rem;
+      font-size: 1rem;
+      color: var(--deep-pink);
     }
     footer {
-      text-align: center; padding: 2rem 1rem;
-      background: var(--white); color: var(--black-text);
-      font-size: .8rem; border-top: 1px solid #ddd;
+      text-align: center;
+      padding: 2rem 1rem;
+      background: var(--white);
+      color: var(--black-text);
+      font-size: .8rem;
+      border-top: 1px solid #ddd;
     }
   </style>
 </head>
@@ -83,27 +112,24 @@
   <footer>&copy; 2025 DoYouKnow</footer>
 
   <script>
-    // Save entry to localStorage
-    function saveEntry(text) {
+    function saveDisabled(text) {
       const key = 'doyouknow_submissions';
       const all = JSON.parse(localStorage.getItem(key) || '[]');
       all.push({ type: 'disabled', text });
       localStorage.setItem(key, JSON.stringify(all));
     }
-
-    const disableTxt = document.getElementById('disabledText');
-    const disableBtn = document.getElementById('disabledSubmit');
-    disableTxt.addEventListener('input', () => {
-      disableBtn.disabled = !disableTxt.value.trim();
+    const disabledTxt = document.getElementById('disabledText');
+    const disabledBtn = document.getElementById('disabledSubmit');
+    disabledTxt.addEventListener('input', () => {
+      disabledBtn.disabled = !disabledTxt.value.trim();
     });
-
-    disableBtn.addEventListener('click', () => {
-      const txt = disableTxt.value.trim();
+    disabledBtn.addEventListener('click', () => {
+      const txt = disabledTxt.value.trim();
       if (!txt) return;
-      saveEntry(txt);
+      saveDisabled(txt);
       alert('Thank you for sharing!');
-      disableTxt.value = '';
-      disableBtn.disabled = true;
+      disabledTxt.value = '';
+      disabledBtn.disabled = true;
     });
   </script>
 </body>
