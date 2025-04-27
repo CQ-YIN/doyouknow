@@ -243,7 +243,7 @@ const animals = [
     const overlay = document.getElementById('overlay');
     const popup = document.getElementById('popup');
     function showPopup(e) {
-      popup.innerHTML = `<h2 style="margin-top:0;">${e}</h2><p>Voices related to ${e} appear here.</p><button onclick="closePopup()">Close</button>`;
+      popup.innerHTML = `<h2 style="margin-top:0;">${e}</h2><p>3 things about ${e} appear here.</p><button onclick="closePopup()">Close</button>`;
       overlay.classList.add('show');
       overlay.setAttribute('aria-hidden','false');
       popup.focus();
